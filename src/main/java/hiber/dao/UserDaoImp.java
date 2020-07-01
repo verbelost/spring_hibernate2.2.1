@@ -30,15 +30,13 @@ public class UserDaoImp implements UserDao {
    }
 
    @Override
-   @SuppressWarnings("unchecked")
    public User getUserByCar(Long id, int series) {
-      String hql = "from Car where id = :id and series = :series";
-      Session session = sessionFactory.openSession();
-      Query<Car> query = session.createQuery(hql);
-      query.setParameter("id", id);
-      query.setParameter("series", series);
-      Car car = query.getSingleResult();
-      session.close();
+      Car car = (Car) sessionFactory
+              .getCurrentSession()
+              .createQuery("from Car where id = :id and series = :series")
+              .setParameter("id", id)
+              .setParameter("series", series)
+              .getSingleResult();
       return (User) sessionFactory.getCurrentSession()
               .createQuery("from User where car = :car")
               .setParameter("car", car)

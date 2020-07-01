@@ -12,7 +12,6 @@ public class Car {
     private Long id;
 
     @Column(name = "series")
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private int series;
 
     @Column(name = "name")
@@ -24,7 +23,8 @@ public class Car {
     public Car() {
     }
 
-    public Car(String name) {
+    public Car(int series, String name) {
+        this.series = series;
         this.name = name;
     }
 

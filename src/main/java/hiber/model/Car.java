@@ -7,6 +7,10 @@ import javax.persistence.*;
 public class Car {
 
     @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     @Column(name = "series")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int series;
@@ -20,9 +24,8 @@ public class Car {
     public Car() {
     }
 
-    public Car(String name, User user) {
+    public Car(String name) {
         this.name = name;
-        this.user = user;
     }
 
     public int getSeries() {
